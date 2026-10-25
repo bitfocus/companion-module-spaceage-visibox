@@ -1,0 +1,34 @@
+{
+	"id": "spaceage-visibox",
+	"name": "SpaceAge Visibox",
+	"shortname": "Visibox",
+	"description": "Control Visibox live visual performance software",
+	"version": "1.0.0",
+	"license": "MIT",
+	"repository": "git+https://github.com/bitfocus/companion-module-spaceage-visibox.git",
+	"bugs": "https://github.com/bitfocus/companion-module-spaceage-visibox/issues",
+	"maintainers": [
+		{
+			"name": "SpaceAge TV",
+			"email": "support@spaceage.tv"
+		}
+	],
+	"runtime": {
+		"type": "node22",
+		"api": "nodejs-ipc",
+		"apiVersion": "1.14.1",
+		"entrypoint": "../dist/main.js"
+	},
+	"legacyIds": [],
+	"manufacturer": "SpaceAge",
+	"products": [
+		"Visibox"
+	],
+	"keywords": [
+		"visibox",
+		"video",
+		"visual",
+		"performance",
+		"live"
+	]
+}

@@ -1,0 +1,36 @@
+{
+  "name": "companion-module-spaceage-visibox",
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "type": "module",
+  "scripts": {
+    "build": "rimraf dist && tsc -p tsconfig.build.json --noEmit && esbuild src/main.ts --bundle --platform=node --target=node22 --format=esm --main-fields=module,main --external:@companion-module/base --external:ws --outfile=dist/main.js",
+    "dev": "npm run build",
+    "package": "npm run build && companion-module-build",
+    "lint": "eslint .",
+    "test": "rimraf .test-build && tsc -p tsconfig.test.json && node --test .test-build/*.test.js"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bitfocus/companion-module-spaceage-visibox.git"
+  },
+  "engines": {
+    "node": "^22.0"
+  },
+  "dependencies": {
+    "@companion-module/base": "~1.14.1",
+    "ws": "~8.21.1"
+  },
+  "devDependencies": {
+    "@companion-module/tools": "^2.6.1",
+    "@visibox/api-client": "^1.1.0",
+    "@types/node": "^22.19.3",
+    "@types/ws": "^8.18.1",
+    "esbuild": "^0.28.1",
+    "eslint": "^9.39.2",
+    "rimraf": "^6.1.2",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.51.0"
+  }
+}
