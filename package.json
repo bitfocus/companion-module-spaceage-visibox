@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json --noEmit && esbuild src/main.ts --bundle --platform=node --target=node22 --format=esm --main-fields=module,main --external:@companion-module/base --external:ws --outfile=dist/main.js",
-    "dev": "npm run build",
-    "package": "npm run build && companion-module-build",
+    "dev": "yarn build",
+    "package": "yarn build && companion-module-build",
     "lint": "eslint .",
     "test": "rimraf .test-build && tsc -p tsconfig.test.json && node --test .test-build/*.test.js"
   },
@@ -24,13 +24,15 @@
   },
   "devDependencies": {
     "@companion-module/tools": "^2.6.1",
-    "@visibox/api-client": "^1.1.0",
     "@types/node": "^22.19.3",
     "@types/ws": "^8.18.1",
+    "@visibox/api-client": "^1.1.0",
     "esbuild": "^0.28.1",
     "eslint": "^9.39.2",
+    "prettier": "^3.9.9",
     "rimraf": "^6.1.2",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.51.0"
-  }
+  },
+  "packageManager": "yarn@4.18.1"
 }
