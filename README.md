@@ -39,53 +39,53 @@ Visibox 6.0 requires every connection to be approved once, including one from th
 
 ## Configuration
 
-| Setting | Default | Description |
-|---|---|---|
-| Host | `127.0.0.1` | IP address of the Visibox computer |
-| WebSocket Port | `17734` | Visibox WebSocket API port |
-| HTTP Port | `17736` | Visibox HTTP API port |
-| Pairing Code | _(empty)_ | 6-digit code from Visibox — choose **Pair with Remote…** (Visibox menu on macOS, File menu on Windows); used once, then cleared |
+| Setting        | Default     | Description                                                                                                                     |
+| -------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Host           | `127.0.0.1` | IP address of the Visibox computer                                                                                              |
+| WebSocket Port | `17734`     | Visibox WebSocket API port                                                                                                      |
+| HTTP Port      | `17736`     | Visibox HTTP API port                                                                                                           |
+| Pairing Code   | _(empty)_   | 6-digit code from Visibox — choose **Pair with Remote…** (Visibox menu on macOS, File menu on Windows); used once, then cleared |
 
 ## Actions
 
-| Action | Description | Key Parameters |
-|---|---|---|
-| **Trigger Clip** | Play clip by index | clipIndex (0-99), songOffset (-50 to +50) |
-| **Release Clip** | Release a held clip — put it in a button's *release* actions for hold-to-play | clipIndex (0-99), songOffset (-50 to +50) |
-| **Song Select** | Switch to song | songIndex (0-99), songId (optional), stopPlaying |
-| **Playback Control** | Play/Pause/Stop/Resume/Toggle | controlType dropdown |
-| **Navigation** | Next/Prev Clip/Song, Random Clip | cross-song, don't-stop options |
-| **Output Level** | Set global volume, or nudge it up/down | mode (set / up / down), level (0-100%), step (1-100%) |
-| **Set Control** | Drive a Real-Time Control, moving every Target bound to it | control (letter A-Z), mode (set / adjust), value (-100 to 100%) |
-| **Set Target Param** | Write one Real-Time Control Target directly, bypassing Controls | targetId, value (-100 to 100%) |
-| **System Control** | Panic, Fullscreen, Mute | controlType dropdown |
+| Action               | Description                                                                   | Key Parameters                                                  |
+| -------------------- | ----------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| **Trigger Clip**     | Play clip by index                                                            | clipIndex (0-99), songOffset (-50 to +50)                       |
+| **Release Clip**     | Release a held clip — put it in a button's _release_ actions for hold-to-play | clipIndex (0-99), songOffset (-50 to +50)                       |
+| **Song Select**      | Switch to song                                                                | songIndex (0-99), songId (optional), stopPlaying                |
+| **Playback Control** | Play/Pause/Stop/Resume/Toggle                                                 | controlType dropdown                                            |
+| **Navigation**       | Next/Prev Clip/Song, Random Clip                                              | cross-song, don't-stop options                                  |
+| **Output Level**     | Set global volume, or nudge it up/down                                        | mode (set / up / down), level (0-100%), step (1-100%)           |
+| **Set Control**      | Drive a Real-Time Control, moving every Target bound to it                    | control (letter A-Z), mode (set / adjust), value (-100 to 100%) |
+| **Set Target Param** | Write one Real-Time Control Target directly, bypassing Controls               | targetId, value (-100 to 100%)                                  |
+| **System Control**   | Panic, Fullscreen, Mute                                                       | controlType dropdown                                            |
 
 ## Feedbacks
 
-| Feedback | Type | Color | Description |
-|---|---|---|---|
-| Clip Playing | Boolean | Green | True when any clip is playing or tailing |
-| Clip Paused | Boolean | Yellow | True when any clip is paused |
-| Specific Clip Active | Boolean | Green | True when clip at specific index is active |
-| Song Active | Boolean | Blue | True when song at specific index is active |
-| Output Muted | Boolean | Red | True when output audio is muted |
-| Output Fullscreen | Boolean | Blue | True when the output window is fullscreen |
+| Feedback             | Type    | Color  | Description                                |
+| -------------------- | ------- | ------ | ------------------------------------------ |
+| Clip Playing         | Boolean | Green  | True when any clip is playing or tailing   |
+| Clip Paused          | Boolean | Yellow | True when any clip is paused               |
+| Specific Clip Active | Boolean | Green  | True when clip at specific index is active |
+| Song Active          | Boolean | Blue   | True when song at specific index is active |
+| Output Muted         | Boolean | Red    | True when output audio is muted            |
+| Output Fullscreen    | Boolean | Blue   | True when the output window is fullscreen  |
 
 ## Variables
 
-| Variable | Description | Example |
-|---|---|---|
-| `playback_status` | Current state | `"playing"`, `"paused"`, `"stopped"` |
-| `active_song_name` | Active song title | `"Opening Number"` |
-| `active_song_index` | Active song position (0-based) | `"0"` |
-| `active_clip_name` | Active clip title | `"Intro Video"` |
-| `active_clip_index` | Active clip position (0-based) | `"2"` |
-| `project_name` | Active project name | `"My Show"` |
-| `output_level` | Output volume, 0-100 | `80` |
-| `output_muted` | Output audio muted | `true` |
-| `output_fullscreen` | Output window fullscreen | `false` |
-| `song_1_name` … `song_10_name` | Name of the Nth song in the project; empty past the last song | `"Opening Number"` |
-| `clip_1_name` … `clip_10_name` | Name of the Nth clip in the active song; empty past the last clip | `"Intro Video"` |
+| Variable                       | Description                                                       | Example                              |
+| ------------------------------ | ----------------------------------------------------------------- | ------------------------------------ |
+| `playback_status`              | Current state                                                     | `"playing"`, `"paused"`, `"stopped"` |
+| `active_song_name`             | Active song title                                                 | `"Opening Number"`                   |
+| `active_song_index`            | Active song position (0-based)                                    | `"0"`                                |
+| `active_clip_name`             | Active clip title                                                 | `"Intro Video"`                      |
+| `active_clip_index`            | Active clip position (0-based)                                    | `"2"`                                |
+| `project_name`                 | Active project name                                               | `"My Show"`                          |
+| `output_level`                 | Output volume, 0-100                                              | `80`                                 |
+| `output_muted`                 | Output audio muted                                                | `true`                               |
+| `output_fullscreen`            | Output window fullscreen                                          | `false`                              |
+| `song_1_name` … `song_10_name` | Name of the Nth song in the project; empty past the last song     | `"Opening Number"`                   |
+| `clip_1_name` … `clip_10_name` | Name of the Nth clip in the active song; empty past the last clip | `"Intro Video"`                      |
 
 ## Presets
 
@@ -112,17 +112,17 @@ To use it:
 1. In Companion, open **Import / Export** and import `visibox-starter.companionconfig`.
 2. Choose the page to import it into.
 3. Map its Visibox connection to your existing Visibox connection. If you have none, let the import create one.
-4. If the import created a new connection, pair it (see *Pairing* in `companion/HELP.md`).
+4. If the import created a new connection, pair it (see _Pairing_ in `companion/HELP.md`).
 
 ## Troubleshooting
 
-| Problem | Solution |
-|---|---|
-| Status shows "Disconnected" | Verify Visibox is running on a pro plan (the Remote Control API is a pro feature); check host/port config |
-| Status shows "Error" | Check Companion logs; verify network connectivity to Visibox |
+| Problem                               | Solution                                                                                                                 |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Status shows "Disconnected"           | Verify Visibox is running on a pro plan (the Remote Control API is a pro feature); check host/port config                |
+| Status shows "Error"                  | Check Companion logs; verify network connectivity to Visibox                                                             |
 | Status shows "Authentication Failure" | Enter a fresh pairing code from Visibox (**Pair with Remote…**), or approve the dialog on the Visibox machine, then save |
-| Actions not firing | Ensure status is green "OK"; check WebSocket connection |
-| Feedbacks not updating | Verify a project is loaded in Visibox; re-enable module instance |
+| Actions not firing                    | Ensure status is green "OK"; check WebSocket connection                                                                  |
+| Feedbacks not updating                | Verify a project is loaded in Visibox; re-enable module instance                                                         |
 
 ## License
 

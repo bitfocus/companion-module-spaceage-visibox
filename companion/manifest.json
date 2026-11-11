@@ -21,14 +21,6 @@
 	},
 	"legacyIds": [],
 	"manufacturer": "SpaceAge",
-	"products": [
-		"Visibox"
-	],
-	"keywords": [
-		"visibox",
-		"video",
-		"visual",
-		"performance",
-		"live"
-	]
+	"products": ["Visibox"],
+	"keywords": ["visibox", "video", "visual", "performance", "live"]
 }

@@ -10,11 +10,11 @@ Control [Visibox](https://visibox.tv) live visual performance software from Bitf
 
 ## Configuration
 
-| Field          | Default     | Description                                                            |
-| -------------- | ----------- | ---------------------------------------------------------------------- |
-| Host           | `127.0.0.1` | IP address of the computer running Visibox                             |
-| WebSocket Port | `17734`     | Visibox WebSocket API port                                             |
-| HTTP Port      | `17736`     | Visibox HTTP API port                                                  |
+| Field          | Default     | Description                                                                                                                                     |
+| -------------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Host           | `127.0.0.1` | IP address of the computer running Visibox                                                                                                      |
+| WebSocket Port | `17734`     | Visibox WebSocket API port                                                                                                                      |
+| HTTP Port      | `17736`     | Visibox HTTP API port                                                                                                                           |
 | Pairing Code   | _(empty)_   | 6-digit code from Visibox (**Pair with Remote…** — Visibox menu on macOS, File menu on Windows). Used once on the next connection, then cleared |
 
 ## Pairing
@@ -86,32 +86,32 @@ Write one Real-Time Control Target parameter directly by its structured id (for 
 
 ## Feedbacks
 
-| Feedback             | Description                                                                             |
-| -------------------- | --------------------------------------------------------------------------------------- |
-| Clip Playing         | True when any clip is currently playing or tailing                                      |
-| Clip Paused          | True when the active clip is paused                                                     |
-| Specific Clip Active | True when a clip at a specific index is active (playing, paused, or tailing)            |
-| Song Active          | True when a song at a specific index is the active song                                 |
-| Output Muted         | True when output audio is muted                                                         |
-| Output Fullscreen    | True when the output window is fullscreen                                               |
+| Feedback             | Description                                                                  |
+| -------------------- | ---------------------------------------------------------------------------- |
+| Clip Playing         | True when any clip is currently playing or tailing                           |
+| Clip Paused          | True when the active clip is paused                                          |
+| Specific Clip Active | True when a clip at a specific index is active (playing, paused, or tailing) |
+| Song Active          | True when a song at a specific index is the active song                      |
+| Output Muted         | True when output audio is muted                                              |
+| Output Fullscreen    | True when the output window is fullscreen                                    |
 
 ## Variables
 
 Variables are named by the connection's label. The examples below assume the label `Visibox`; substitute your own.
 
-| Variable                                   | Description                                       |
-| ------------------------------------------ | ------------------------------------------------- |
-| `$(Visibox:playback_status)`               | Current status: `playing`, `paused`, or `stopped` |
-| `$(Visibox:active_song_name)`              | Name of the active song                           |
-| `$(Visibox:active_song_index)`             | 0-based index of the active song                  |
-| `$(Visibox:active_clip_name)`              | Name of the currently active clip                 |
-| `$(Visibox:active_clip_index)`             | 0-based index of the currently active clip        |
-| `$(Visibox:project_name)`                  | Name of the active project                        |
-| `$(Visibox:output_level)`                  | Output volume, 0–100                              |
-| `$(Visibox:output_muted)`                  | `true` when output audio is muted                 |
-| `$(Visibox:output_fullscreen)`             | `true` when the output window is fullscreen       |
-| `$(Visibox:song_1_name)` … `song_10_name`  | Name of song 1–10 in the project (empty if none)  |
-| `$(Visibox:clip_1_name)` … `clip_10_name`  | Name of clip 1–10 in the active song (empty if none) |
+| Variable                                  | Description                                          |
+| ----------------------------------------- | ---------------------------------------------------- |
+| `$(Visibox:playback_status)`              | Current status: `playing`, `paused`, or `stopped`    |
+| `$(Visibox:active_song_name)`             | Name of the active song                              |
+| `$(Visibox:active_song_index)`            | 0-based index of the active song                     |
+| `$(Visibox:active_clip_name)`             | Name of the currently active clip                    |
+| `$(Visibox:active_clip_index)`            | 0-based index of the currently active clip           |
+| `$(Visibox:project_name)`                 | Name of the active project                           |
+| `$(Visibox:output_level)`                 | Output volume, 0–100                                 |
+| `$(Visibox:output_muted)`                 | `true` when output audio is muted                    |
+| `$(Visibox:output_fullscreen)`            | `true` when the output window is fullscreen          |
+| `$(Visibox:song_1_name)` … `song_10_name` | Name of song 1–10 in the project (empty if none)     |
+| `$(Visibox:clip_1_name)` … `clip_10_name` | Name of clip 1–10 in the active song (empty if none) |
 
 ## Troubleshooting
 

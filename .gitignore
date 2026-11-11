@@ -1,7 +1,9 @@
 node_modules/
-dist/
-.test-build/
-.yarn/
-*.tgz
-pkg/
 package-lock.json
+/pkg
+/*.tgz
+/dist
+DEBUG-*
+/.yarn
+/.vscode
+.test-build/
