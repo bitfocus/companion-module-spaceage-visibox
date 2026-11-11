@@ -80,24 +80,21 @@ export function UpdateActions(self: ModuleInstance): void {
 
 	// Resolve the [clipIndex, songID?] params a clipIndex/songOffset option pair
 	// addresses right now. Shared by trigger_clip and release_clip's fallback.
-	const resolveClipParams = (clipIndex: number, songOffset: number): (string | number)[] => {
-		const params: (string | number)[] = [clipIndex]
+	// Returns null when a non-zero offset names no song (past the first or last
+	// song, or the setlist is not known yet): sending the bare index would make
+	// Visibox play the clip in the active song instead.
+	const resolveClipParams = (clipIndex: number, songOffset: number): (string | number)[] | null => {
+		if (songOffset === 0) return [clipIndex]
 
-		// Resolve songID from offset if needed
-		if (songOffset !== 0) {
-			const state = self.apiClient.getState()
-			if (state.playstate?.activeSongID && state.project) {
-				const songOrder = state.project.songOrder
-				const activeSongIndex = songOrder.indexOf(state.playstate.activeSongID)
-				const targetIndex = activeSongIndex + songOffset
-
-				if (targetIndex >= 0 && targetIndex < songOrder.length) {
-					params.push(songOrder[targetIndex])
-				}
-			}
+		const { project, playstate } = self.apiClient.getState()
+		const songOrder = project?.songOrder ?? []
+		const activeSongIndex = playstate?.activeSongID ? songOrder.indexOf(playstate.activeSongID) : -1
+		const targetSongID = activeSongIndex >= 0 ? songOrder[activeSongIndex + songOffset] : undefined
+		if (!targetSongID) {
+			self.log('warn', `No song at offset ${songOffset} from the active song; clip ${clipIndex} not sent`)
+			return null
 		}
-
-		return params
+		return [clipIndex, targetSongID]
 	}
 
 	self.setActionDefinitions({
@@ -128,6 +125,7 @@ export function UpdateActions(self: ModuleInstance): void {
 				const clipIndex = Number(event.options.clipIndex ?? 0)
 				const songOffset = Number(event.options.songOffset ?? 0)
 				const params = resolveClipParams(clipIndex, songOffset)
+				if (!params) return
 
 				// Pinned for release_clip to pick up on button-up — see the
 				// pressedParams comment above for why re-resolving there is wrong.
@@ -177,6 +175,7 @@ export function UpdateActions(self: ModuleInstance): void {
 				// different song's clip and leaves the held one playing. Say so,
 				// because otherwise a stuck clip has no trail to follow.
 				const params = pinned ?? resolveClipParams(clipIndex, songOffset)
+				if (!params) return
 				if (!pinned) {
 					self.log(
 						'warn',

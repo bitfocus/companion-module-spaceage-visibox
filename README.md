@@ -16,7 +16,7 @@ Companion is a free, open-source platform for controlling professional broadcast
 ## Prerequisites
 
 - **Visibox 6.0+** on a pro plan (the Remote Control API is a pro feature; there is no setting to enable it)
-- **Companion** 4.0 or higher
+- **Companion** 4.2 or higher
 
 ## Install
 

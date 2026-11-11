@@ -3,7 +3,7 @@
 	"name": "SpaceAge Visibox",
 	"shortname": "Visibox",
 	"description": "Control Visibox live visual performance software",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"license": "MIT",
 	"repository": "git+https://github.com/bitfocus/companion-module-spaceage-visibox.git",
 	"bugs": "https://github.com/bitfocus/companion-module-spaceage-visibox/issues",

@@ -65,15 +65,31 @@ export class ModuleInstance extends InstanceBase<ModuleConfig, ModuleSecrets> {
 			},
 		})
 
-		// Wire state changes to feedback/variable refresh. onStateChanged covers
-		// project/playstate and live appState pushes; the initial appState fetch
-		// only emits the event.
+		// With manageState on, onStateChanged fires for every project/playstate
+		// and appState change, including the initial appState fetch, so it is
+		// the only hook needed. The client replaces each state object when it
+		// changes, so comparing references tells which feedbacks can have moved;
+		// one output level, mute or fullscreen change then re-checks only the
+		// two output feedbacks.
+		let seen: {
+			app?: unknown
+			project?: unknown
+			playstate?: unknown
+		} = {}
 		const refresh = () => {
-			this.checkFeedbacks()
-			RefreshVariables(this)
+			const { project, playstate } = this.apiClient.getState()
+			const app = this.apiClient.getAppState()
+			const playChanged = project !== seen.project || playstate !== seen.playstate
+			const appChanged = app !== seen.app
+			seen = { app, project, playstate }
+
+			if (playChanged) {
+				this.checkFeedbacks('clip_playing', 'clip_paused', 'specific_clip_active', 'song_active')
+			}
+			if (appChanged) this.checkFeedbacks('output_muted', 'output_fullscreen')
+			if (playChanged || appChanged) RefreshVariables(this)
 		}
 		this.apiClient.onStateChanged = refresh
-		this.apiClient.on('app-state-changed', refresh)
 		refresh()
 
 		this.updateStatus(InstanceStatus.Connecting)

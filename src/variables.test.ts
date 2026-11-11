@@ -1,7 +1,7 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import type { Project } from '@visibox/api-client'
-import { SLOT_COUNT, slotNames } from './variables.js'
+import { SLOT_COUNT, changedValues, slotNames } from './variables.js'
 
 const project = {
 	songOrder: ['s1', 's2'],
@@ -35,4 +35,12 @@ void test('every slot is defined, empty past the end or with no project', () => 
 		assert.equal(names[`song_${SLOT_COUNT}_name`], '')
 		assert.equal(names[`clip_${SLOT_COUNT}_name`], '')
 	}
+})
+
+void test('changedValues keeps only entries that differ', () => {
+	const prev = { output_level: 50, output_muted: false, song_1_name: 'A' }
+	const next = { output_level: 55, output_muted: false, song_1_name: 'A' }
+	assert.deepEqual(changedValues(prev, next), { output_level: 55 })
+	assert.deepEqual(changedValues({}, { a: '' }), { a: '' })
+	assert.deepEqual(changedValues(next, next), {})
 })

@@ -14,7 +14,7 @@
  * - song_N_name: Name of the Nth song in the project (N = 1–SLOT_COUNT)
  * - clip_N_name: Name of the Nth clip in the active song (N = 1–SLOT_COUNT)
  *
- * Variables are refreshed on every state change via RefreshVariables().
+ * RefreshVariables() runs on each state change and sends only changed values.
  */
 
 import { summarizePlayback, type Project } from '@visibox/api-client'
@@ -22,6 +22,9 @@ import type { ModuleInstance } from './main.js'
 
 /** How many song_N_name / clip_N_name variables exist — the presets' reach. */
 export const SLOT_COUNT = 10
+
+/** The values each instance last sent, so a refresh can send only changes. */
+const lastSent = new WeakMap<ModuleInstance, Record<string, string | number | boolean>>()
 
 /**
  * Song and clip names by 1-based slot, matching the Song N / Clip N presets.
@@ -41,6 +44,8 @@ export function slotNames(project: Project | null | undefined, activeSongID: str
 
 export function UpdateVariableDefinitions(self: ModuleInstance): void {
 	const slots = Array.from({ length: SLOT_COUNT }, (_, i) => i + 1)
+	// New definitions start empty, so the next refresh must send everything.
+	lastSent.delete(self)
 	self.setVariableDefinitions([
 		{ variableId: 'playback_status', name: 'Playback Status' },
 		{ variableId: 'active_song_name', name: 'Active Song Name' },
@@ -74,7 +79,7 @@ export function RefreshVariables(self: ModuleInstance): void {
 	// Indices stay '' when unknown — buttons were written against that.
 	const index = (i: number) => (i >= 0 ? String(i) : '')
 
-	self.setVariableValues({
+	const values: Record<string, string | number | boolean> = {
 		playback_status: summary.status,
 		active_song_name: summary.activeSongTitle,
 		active_song_index: index(summary.activeSongIndex),
@@ -85,5 +90,21 @@ export function RefreshVariables(self: ModuleInstance): void {
 		output_muted: app.audioMuted,
 		output_fullscreen: app.outputIsFullscreen,
 		...slotNames(state.project, summary.activeSongID),
-	})
+	}
+
+	// Send only what changed: an output level change touches one variable,
+	// not all 29.
+	const sent = lastSent.get(self) ?? {}
+	const changed = changedValues(sent, values)
+	lastSent.set(self, values)
+	if (Object.keys(changed).length > 0) self.setVariableValues(changed)
+}
+
+/** The entries of `next` whose value differs from `prev`. */
+export function changedValues<T>(prev: Record<string, T>, next: Record<string, T>): Record<string, T> {
+	const changed: Record<string, T> = {}
+	for (const [id, value] of Object.entries(next)) {
+		if (prev[id] !== value) changed[id] = value
+	}
+	return changed
 }
