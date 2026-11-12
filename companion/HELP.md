@@ -1,6 +1,6 @@
-# SpaceAge Visibox
+# Spaceage Visibox
 
-Control [Visibox](https://visibox.tv) live visual performance software from Bitfocus Companion.
+Control [Visibox](https://spaceage.tv) live visual performance software from Bitfocus Companion.
 
 ## Prerequisites
 

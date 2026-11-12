@@ -20,7 +20,7 @@ Companion is a free, open-source platform for controlling professional broadcast
 
 ## Install
 
-In Companion, open **Connections**, add a connection, and search for **Visibox**. Choose **SpaceAge Visibox**, then fill in the settings below.
+In Companion, open **Connections**, add a connection, and search for **Visibox**. Choose **Spaceage Visibox**, then fill in the settings below.
 
 ## How It Works
 
