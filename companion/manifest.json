@@ -1,6 +1,6 @@
 {
 	"id": "spaceage-visibox",
-	"name": "SpaceAge Visibox",
+	"name": "Spaceage Visibox",
 	"shortname": "Visibox",
 	"description": "Control Visibox live visual performance software",
 	"version": "1.0.2",
@@ -9,7 +9,7 @@
 	"bugs": "https://github.com/bitfocus/companion-module-spaceage-visibox/issues",
 	"maintainers": [
 		{
-			"name": "SpaceAge TV",
+			"name": "Spaceage",
 			"email": "support@spaceage.tv"
 		}
 	],
@@ -20,7 +20,7 @@
 		"entrypoint": "../dist/main.js"
 	},
 	"legacyIds": [],
-	"manufacturer": "SpaceAge",
+	"manufacturer": "Spaceage",
 	"products": ["Visibox"],
 	"keywords": ["visibox", "video", "visual", "performance", "live"]
 }
